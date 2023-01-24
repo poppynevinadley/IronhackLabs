@@ -130,7 +130,7 @@ and address.address like '%E';
 
 
 #Optional - what is the most rented film?
-select film.title as 'Movie', count(rental.rental_date) as 'Rented Count'
+select film.title as 'Movie'
 	from film 
 	join inventory
     USING (film_id)
