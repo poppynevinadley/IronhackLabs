@@ -130,10 +130,12 @@ and address.address like '%E';
 
 
 #Optional - what is the most rented film?
-SELECT a.first_name, act_lname, mov_title, mov_year
-FROM actor
-JOIN movie_cast 
-ON actor.act_id=movie_cast.act_id
-JOIN movie 
-ON movie_cast.mov_id=movie.mov_id
-WHERE mov_year NOT BETWEEN 1990 and 2000;
+select film.title as 'Movie', count(rental.rental_date) as 'Rented Count'
+	from film 
+	join inventory
+    USING (film_id)
+	join rental
+    USING (inventory_id)
+	group by film.title
+	order by count(rental.rental_date) desc
+    LIMIT 1;
